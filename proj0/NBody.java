@@ -10,14 +10,14 @@ public class NBody{
     In in = new In(filepath);
     int number_planet = in.readInt();
     double radius = in.readDouble();
-    Planet[] all_planets = new Planet[5];
-    for (int i =0; i< 5; i++){
+    Planet[] all_planets = new Planet[number_planet];
+    for (int i =0; i< number_planet; i++){
       all_planets[i] = new Planet(in.readDouble(),in.readDouble(),in.readDouble(),in.readDouble(),in.readDouble(),in.readString());
     }
     return all_planets;
   }
 
-  public static void draw_background(double radius){
+  public private void draw_background(double radius){
     String imagepath = "images/starfield.jpg";
     StdDraw.setScale(-radius,radius);
     StdDraw.clear();
