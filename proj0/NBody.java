@@ -17,7 +17,7 @@ public class NBody{
     return all_planets;
   }
 
-  public private void draw_background(double radius){
+   private static void draw_background(double radius){
     String imagepath = "images/starfield.jpg";
     StdDraw.setScale(-radius,radius);
     StdDraw.clear();
