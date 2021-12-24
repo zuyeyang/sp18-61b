@@ -103,7 +103,7 @@ public class IntList {
         if (A == null){
             return B;
         } else {
-            return new IntList (A.first, catenate(A.rest, B));
+             return new IntList (A.first, catenate(A.rest, B));
         }
     }
 
