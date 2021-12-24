@@ -9,7 +9,6 @@ public class LinkedListDequeTest {
 		}
 		return true;
 	}
-
 	/* Utility method for printing out empty checks. */
 	public static boolean checkSize(int expected, int actual) {
 		if (expected != actual) {
@@ -18,7 +17,6 @@ public class LinkedListDequeTest {
 		}
 		return true;
 	}
-
 	public static boolean checkget(int expected, int actual) {
 		if (expected != actual) {
 			System.out.println("get() returned " + actual + ", but expected: " + expected);
@@ -26,7 +24,6 @@ public class LinkedListDequeTest {
 		}
 		return true;
 	}
-
 	/* Prints a nice message based on whether a test passed. 
 	 * The \n means newline. */
 	public static void printTestStatus(boolean passed) {
@@ -50,7 +47,6 @@ public class LinkedListDequeTest {
 
 		boolean passed = checkEmpty(true, lld1.isEmpty());
 		lld1.addFirst("front");
-		
 		// The && operator is the same as "and" in Python.
 		// It's a binary operator that returns true if both arguments true, and false otherwise.
 		passed = checkSize(1, lld1.size()) && passed;
@@ -61,12 +57,23 @@ public class LinkedListDequeTest {
 
 		lld1.addLast("back");
 		passed = checkSize(3, lld1.size()) && passed;
+		lld1.addLast("back3");
+		lld1.addLast("back4");
+		lld1.addLast("back5");
+		lld1.addFirst("back6");
+		lld1.addLast("back7");
+		lld1.printDeque();
+		lld1.addLast("back8");
+		lld1.printDeque();
+		lld1.addFirst("back9");
+		lld1.addLast("back10");
 
 		System.out.println("Printing out deque: ");
+		//System.out.println("Full? " + lld1.isfull());
 		lld1.printDeque();
 
 		printTestStatus(passed);
-
+		System.out.println(lld1.get(0));
 	}
 
 	/** Adds an item, then removes an item, and ensures that dll is empty afterwards. */

@@ -3,7 +3,7 @@ public class ArrayDeque<T> {
     private int size;
     private int nextFirst;
     private int nextLast;
-    private static int REFACTOR = 2;
+    private static int RFACTOR = 2;
     private static int INITIAL_CAPACITY = 8;
 
     public ArrayDeque(){
@@ -12,30 +12,67 @@ public class ArrayDeque<T> {
         nextLast = 1;
         Items = (T[]) new Object[INITIAL_CAPACITY];
     }
+    private void calculateFront(){
+        nextFirst = (nextFirst +Items.length - 1) % Items.length;
+    }
+    private void calculateLast(){
+        nextLast = (nextLast + 1) % Items.length;
+    }
+    private int respect(int index, int length){
+        return index % length;
+    }
+    private int plusOne(int index){
+        return (index+1) % Items.length;
+    }
+    private int plusOne(int index, int length) {
+        return (index + 1) % length;
+    }
+    private int minusOne(int index) {
+        return (index + Items.length - 1) % Items.length;
+    }
+
+    private int minusOne(int index, int length) {
+        return (index + length - 1) % length;
+    }
+    public boolean isfull(){
+        return Items.length <= size;
+    }
+    private void extend(){
+        resize(RFACTOR*Items.length);
+    }
+    private void shrink(){
+        resize(Items.length/RFACTOR);
+    }
     private void resize(int capacity){
-        T[] temp = (T[]) new Object[capacity];
-        System.arraycopy(Items,0,temp,0,size);
-        Items = temp;
+        T[] a = (T[]) new Object[capacity];
+        int begin = plusOne(nextFirst);
+        int end = minusOne(nextLast);
+        nextFirst = 0;
+        nextLast = 1;
+        for (int i = begin; i != end; i = plusOne(i)) {
+            a[nextLast] = Items[i];
+            nextLast = plusOne(nextLast, capacity);
+        }
+        a[nextLast] = Items[end];
+        nextLast = plusOne(nextLast, capacity);
+        Items = a;
     }
-    private boolean isfull(){
-        return Items.length == size;
-    }
+
     public void addFirst(T item){
         if (isfull()){
-            resize(REFACTOR*Items.length);
+            resize(RFACTOR*Items.length);
         }
         Items[nextFirst] = item;
-        nextFirst = (nextFirst - 1) % Items.length;
+        calculateFront();
         size++;
     }
 
     public void addLast(T item) {
         if (isfull()){
-            resize(REFACTOR*Items.length);
+            extend();
         }
-
         Items[nextLast] = item;
-        nextLast = (nextLast + 1) % Items.length;
+        calculateLast();
         size++;
     }
 
@@ -48,34 +85,44 @@ public class ArrayDeque<T> {
     }
 
     public void printDeque(){
-        int cursor = (nextFirst + 1)%Items.length;
-        while(cursor!=nextLast){
-            System.out.print(Items[cursor]);
+        for (int i = 0; i < Items.length; i++){
+            if (get(i) == null){
+                System.out.println();
+                return;
+            }
+            System.out.print(get(i));
             System.out.print(" ");
-            cursor = (cursor + 1)%Items.length;
         }
         System.out.println();
     }
-
+    private boolean isspare(){
+        return Items.length >= 16 && size() > Items.length/4;
+    }
     public T removeFirst(){
-        T deleted = Items[(nextFirst+1)% Items.length];
-        size--;
-        if (Items.length >= 16 && size < Items.length/4){
-            resize(Items.length/REFACTOR);
+        if (isspare()){
+            shrink();
         }
-        Items[(nextFirst+1)% Items.length] = null;
-        nextFirst = (nextFirst+1)% Items.length;
+        nextFirst = plusOne(nextFirst);
+        T deleted = Items[nextFirst];
+        Items[nextFirst] = null;
+        size--;
+        if (size < 0){
+            size = 0;
+        }
         return deleted;
     }
 
     public T removeLast(){
-        T deleted = Items[(nextLast-1)% Items.length];
-        size--;
-        if (Items.length >= 16 && size < Items.length/4){
-            resize(Items.length/REFACTOR);
+        if (isspare()){
+            shrink();
         }
-        Items[(nextLast-1)% Items.length] = null;
-        nextFirst = (nextLast-1)% Items.length;
+        nextLast = minusOne(nextLast);
+        T deleted = Items[nextLast];
+        Items[nextLast] = null;
+        size--;
+        if (size < 0){
+            size = 0;
+        }
         return deleted;
     }
 
