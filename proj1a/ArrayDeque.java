@@ -96,7 +96,7 @@ public class ArrayDeque<T> {
         System.out.println();
     }
     private boolean isspare(){
-        return Items.length >= 16 && size() > Items.length/4;
+        return Items.length >= 16 && size() < Items.length/4;
     }
     public T removeFirst(){
         nextFirst = plusOne(nextFirst);

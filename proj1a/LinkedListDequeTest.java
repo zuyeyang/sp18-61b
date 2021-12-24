@@ -101,30 +101,47 @@ public class LinkedListDequeTest {
 	public static void getTest() {
 		System.out.println("Running get test.");
 
-		ArrayDeque<Integer> lld1 = new ArrayDeque<Integer>();
+		ArrayDeque<Integer> ArrayDeque = new ArrayDeque<Integer>();
 		// should be empty
 
-		lld1.addLast(0);
-		lld1.addFirst(1);
-		lld1.removeLast();
-		lld1.addFirst(3);
-		System.out.println(lld1.removeFirst());
-		lld1.addLast(6);
-		lld1.addLast(7);
-		lld1.addFirst(8);
-		lld1.addFirst(9);
-		lld1.addLast(10);
-		lld1.addFirst(11);
-		System.out.println(lld1.removeLast());
-		lld1.addLast(13);
-		lld1.addLast(14);
-		lld1.addFirst(15);
-		lld1.printDeque();
-		System.out.println(lld1.removeFirst());
+		ArrayDeque.addLast(0);
+		ArrayDeque.addLast(1);
+		ArrayDeque.addFirst(2);
+		ArrayDeque.get(0) ;
+		ArrayDeque.get(2)  ;
+		ArrayDeque.addLast(5);
+			ArrayDeque.printDeque();
+			System.out.println(ArrayDeque.size());
+		ArrayDeque.removeFirst()  ;
+			ArrayDeque.printDeque();
+			System.out.println(ArrayDeque.size());
+		ArrayDeque.addFirst(7);
+		ArrayDeque.removeLast()    ;
+		ArrayDeque.addFirst(9);
+		ArrayDeque.addLast(10);
+		ArrayDeque.addFirst(11);
+		ArrayDeque.addFirst(12);
+		ArrayDeque.addFirst(13);
+		ArrayDeque.addLast(14);
+		ArrayDeque.addFirst(15);
+			ArrayDeque.printDeque();
+			System.out.println(ArrayDeque.size());
+		ArrayDeque.get(7)      ;
+		ArrayDeque.addFirst(17);
+			ArrayDeque.printDeque();
+			System.out.println(ArrayDeque.size());
+		ArrayDeque.get(4)      ;
+		ArrayDeque.removeFirst()    ;
+			ArrayDeque.printDeque();
+			System.out.println(ArrayDeque.size());
+		ArrayDeque.get(7)      ;
+		ArrayDeque.addFirst(21);
+			ArrayDeque.printDeque();
+			System.out.println(ArrayDeque.size());
+		ArrayDeque.get(7)   ;
 		// should be empty
-		boolean passed = checkget( 14, lld1.get(0));
-
-		printTestStatus(passed);
+		//boolean passed = checkget( 14, ArrayDeque.get(0));
+		//printTestStatus(passed);
 
 	}
 	public static void main(String[] args) {
