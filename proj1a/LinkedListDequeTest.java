@@ -108,19 +108,18 @@ public class LinkedListDequeTest {
 		lld1.addFirst(1);
 		lld1.removeLast();
 		lld1.addFirst(3);
-		lld1.printDeque();
-		lld1.removeFirst()   ;
+		System.out.println(lld1.removeFirst());
 		lld1.addLast(6);
 		lld1.addLast(7);
 		lld1.addFirst(8);
 		lld1.addFirst(9);
 		lld1.addLast(10);
 		lld1.addFirst(11);
-		lld1.printDeque();
-		lld1.removeLast()  ;
+		System.out.println(lld1.removeLast());
 		lld1.addLast(13);
 		lld1.addLast(14);
 		lld1.addFirst(15);
+		lld1.printDeque();
 		System.out.println(lld1.removeFirst());
 		// should be empty
 		boolean passed = checkget( 14, lld1.get(0));

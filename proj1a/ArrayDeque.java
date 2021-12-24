@@ -99,9 +99,6 @@ public class ArrayDeque<T> {
         return Items.length >= 16 && size() > Items.length/4;
     }
     public T removeFirst(){
-        if (isspare()){
-            shrink();
-        }
         nextFirst = plusOne(nextFirst);
         T deleted = Items[nextFirst];
         Items[nextFirst] = null;
@@ -109,19 +106,22 @@ public class ArrayDeque<T> {
         if (size < 0){
             size = 0;
         }
+        if (isspare()){
+            shrink();
+        }
         return deleted;
     }
 
     public T removeLast(){
-        if (isspare()){
-            shrink();
-        }
         nextLast = minusOne(nextLast);
         T deleted = Items[nextLast];
         Items[nextLast] = null;
         size--;
         if (size < 0){
             size = 0;
+        }
+        if (isspare()){
+            shrink();
         }
         return deleted;
     }
