@@ -1,5 +1,5 @@
 public class LinkedListDeque<T> {
-    public class Node{
+    private class Node{
         private T Item;
         private Node prev;
         private Node next;
@@ -68,7 +68,6 @@ public class LinkedListDeque<T> {
             return null;
         }
         size--;
-
         T remvoed = sentinel.next.Item;
         sentinel.next = sentinel.next.next;
         sentinel.next.prev = sentinel;

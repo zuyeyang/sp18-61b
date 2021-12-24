@@ -34,7 +34,7 @@ public class ArrayDeque<T> {
     private int minusOne(int index, int length) {
         return (index + length - 1) % length;
     }
-    public boolean isfull(){
+    private boolean isfull(){
         return Items.length <= size;
     }
     private void extend(){
