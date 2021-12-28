@@ -8,4 +8,11 @@ public abstract class AbstractBoundedQueue<T> implements BoundedQueue<T> {
     public abstract T dequeue();
     public abstract void enqueue(T x);
 
+    public int capacity(){
+        return capacity;
+    }
+    public int fillCount(){
+        return fillCount;
+    }
+
 }
