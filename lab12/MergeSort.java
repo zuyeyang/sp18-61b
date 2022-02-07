@@ -35,7 +35,13 @@ public class MergeSort {
     private static <Item extends Comparable> Queue<Queue<Item>>
             makeSingleItemQueues(Queue<Item> items) {
         // Your code here!
-        return null;
+        Queue<Queue<Item>> result = new Queue<>();
+        for (Item item:items){
+            Queue<Item> single = new Queue<>();
+            single.enqueue(item);
+            result.enqueue(single);
+        }
+        return result;
     }
 
     /**
@@ -54,13 +60,48 @@ public class MergeSort {
     private static <Item extends Comparable> Queue<Item> mergeSortedQueues(
             Queue<Item> q1, Queue<Item> q2) {
         // Your code here!
-        return null;
+        Queue<Item> combined = new Queue<>();
+        int size = q1.size() + q2.size();
+        for (int i = 0; i < size; i++){
+            combined.enqueue(getMin(q1,q2));
+        }
+        return combined;
     }
 
     /** Returns a Queue that contains the given items sorted from least to greatest. */
     public static <Item extends Comparable> Queue<Item> mergeSort(
             Queue<Item> items) {
         // Your code here!
-        return items;
+        Queue<Queue<Item>> queues = makeSingleItemQueues(items);
+        if (items.size()<=1){
+            return items;
+        }
+        Queue<Item> leftQueue = new Queue<>();
+        Queue<Item> rightQueue = new Queue<>();
+        for (int i = 0; i < items.size()/2; i++){
+            Queue<Item> item = queues.dequeue();
+            leftQueue.enqueue(item.dequeue());
+        }
+        for (int i = items.size()/2; i < items.size(); i++){
+            Queue<Item> item = queues.dequeue();
+            rightQueue.enqueue(item.dequeue());
+        }
+        Queue<Item> sortLeft = mergeSort(leftQueue);
+        Queue<Item> sortRight = mergeSort(rightQueue);
+        Queue<Item> result = mergeSortedQueues(sortLeft,sortRight);
+        return result;
+    }
+
+    public static void main (String[] args){
+        Queue<String> students = new Queue<String>();
+        students.enqueue("Alice");
+        students.enqueue("Venson");
+        students.enqueue("Ethan");
+        students.enqueue("Berto");
+        students.enqueue("Nasa");
+        students.enqueue("Kervin");
+        students.enqueue("Pino");
+
+        MergeSort.mergeSort(students).forEach(System.out::println);
     }
 }
